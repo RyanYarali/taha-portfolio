@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<script>try { document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem('color-scheme') ?? 'light dark'; } catch {}</script>
+<title>Page not found · Taha Nankali</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@500&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+  :root { color-scheme: light dark; }
+  :root:has(> head > meta[name="color-scheme"][content="dark"]) { color-scheme: dark; }
+  :root:has(> head > meta[name="color-scheme"][content="light"]) { color-scheme: light; }
+  body { margin: 0; min-height: 100svh; display: grid; place-content: center; text-align: center; padding: 24px 16px;
+    background: light-dark(#f5f6f8, #090b10); color: light-dark(#0b0d12, #eef1f6); font: 400 16px/1.6 Inter, system-ui, sans-serif; }
+  code { font: 500 14px "JetBrains Mono", monospace; color: light-dark(#c9353b, #ff7b7b); }
+  h1 { font: 700 clamp(64px, 18vw, 140px)/.9 "Space Grotesk", sans-serif; letter-spacing: -.05em; margin: 12px 0; }
+  p { color: light-dark(#5d6574, #8b94a6); margin: 0 0 24px; }
+  a { display: inline-block; padding: 14px 22px; border-radius: 999px; background: light-dark(#1d4ed8, #5b9dff); color: light-dark(#fff, #05101f); text-decoration: none; font-weight: 600; }
+</style>
+</head>
+<body>
+  <code>KeyError: page not found</code>
+  <h1>404</h1>
+  <p>This row didn't survive the cleaning step.</p>
+  <div><a href="/">Back to the portfolio</a></div>
+</body>
+</html>
