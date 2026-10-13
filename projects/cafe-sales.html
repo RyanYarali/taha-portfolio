@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<script>
+  document.documentElement.classList.add('js');
+  try { document.querySelector('meta[name="color-scheme"]').content = localStorage.getItem('color-scheme') ?? 'light dark'; } catch {}
+</script>
+<title>Cafe Sales Data Profiling · Taha Nankali</title>
+<meta name="description" content="Case study: profiling a messy cafe sales dataset in Python and Pandas to measure completeness and validity and guide data cleaning.">
+<meta property="og:title" content="Cafe Sales Data Profiling · Taha Nankali">
+<meta property="og:description" content="Python + Pandas data-quality case study with an interactive df.clean() demo.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f6f8">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#090b10">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="../" aria-label="Taha Nankali, home"><span class="brand-mark">TN</span><span>Taha Nankali</span></a>
+    <ul class="nav-links">
+      <li><a href="../#work">Work</a></li><li><a href="../#about">About</a></li><li><a href="../#toolkit">Toolkit</a></li><li><a href="../#experience">Experience</a></li><li><a href="../#contact">Contact</a></li>
+    </ul>
+    <button class="icon-btn theme-toggle" type="button" aria-label="Switch between light and dark theme">
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
+    </button>
+    <a class="btn btn-primary btn-sm" href="../assets/Taha-Nankali-Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    <button class="icon-btn menu-btn" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><span class="burger"><span></span><span></span></span></button>
+  </div>
+</header>
+<nav class="mobile-menu" id="mobile-menu" aria-label="Mobile">
+  <a href="../#work">Work <small>01</small></a><a href="../#about">About <small>02</small></a><a href="../#toolkit">Toolkit <small>03</small></a><a href="../#experience">Experience <small>04</small></a><a href="../#contact">Contact <small>05</small></a>
+  <a class="btn btn-primary" href="../assets/Taha-Nankali-Resume.pdf" target="_blank" rel="noopener">Download resume</a>
+</nav>
+
+<main id="main">
+  <section class="cs-hero">
+    <div class="wrap">
+      <a class="back" href="../#work"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 18l-6-6 6-6"/></svg>All case studies</a>
+      <div class="eyebrow" style="margin-top:28px">Case study 01 · Data quality</div>
+      <h1>Cafe Sales Data Profiling</h1>
+      <p class="lead">Before anyone can analyze a dataset, someone has to find out what's wrong with it. I profiled a messy cafe sales file to measure how complete and valid it really was, and turned that into a cleaning plan.</p>
+      <div class="meta">
+        <div><div class="k">Role</div><div class="v">Data profiling &amp; analysis</div></div>
+        <div><div class="k">Tools</div><div class="v">Python, Pandas, Jupyter</div></div>
+        <div><div class="k">Type</div><div class="v">BCIT academic project</div></div>
+        <div><div class="k">Focus</div><div class="v">Completeness, validity, duplicates</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap cs-body">
+    <div class="cs-block rv">
+      <h2>The problem</h2>
+      <div class="prose">
+        <p>The cafe's sales data looked usable at first glance, but placeholder text like <strong>ERROR</strong> and <strong>UNKNOWN</strong> was mixed into real fields alongside true blanks.</p>
+        <p>Any revenue or product analysis built on it would be quietly wrong. The question: <strong>how bad is it, where exactly, and what should be fixed first?</strong></p>
+      </div>
+    </div>
+
+    <div class="cs-block rv">
+      <h2>What I did</h2>
+      <ol class="did">
+        <li><div><b>Examined structure &amp; data types</b><span>Checked every column's type to catch numbers stored as text and other mismatches.</span></div></li>
+        <li><div><b>Measured missing &amp; invalid values</b><span>Counted true nulls and also the ERROR and UNKNOWN placeholders that a plain null count misses.</span></div></li>
+        <li><div><b>Checked distinct values, duplicates &amp; IDs</b><span>Reviewed category values, duplicate records and transaction IDs for validity.</span></div></li>
+        <li><div><b>Summarized the quality issues</b><span>Turned the profile into a per-column summary that guided cleaning and validation.</span></div></li>
+      </ol>
+    </div>
+
+    <div class="cs-block rv">
+      <h2>Try it</h2>
+      <div>
+        <div class="lab" id="lab">
+          <div class="lab-bar">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span>dirty_cafe_sales.csv · <span id="rows">10</span> rows</span>
+            <span class="quality">quality <span class="meter"><i id="meter"></i></span><b id="pct">—</b></span>
+          </div>
+          <div class="lab-body">
+            <div class="seg" role="group" aria-label="Cleaning steps">
+              <button type="button" data-step="1">1 · Profile</button>
+              <button type="button" data-step="2" disabled>2 · Recover</button>
+              <button type="button" data-step="3" disabled>3 · Dedupe</button>
+              <button type="button" id="runall" style="margin-left:auto">▶ df.clean()</button>
+              <button type="button" id="reset" aria-label="Reset the demo">↺</button>
+            </div>
+            <div class="tbl-wrap"><table class="df" id="df"></table></div>
+            <div class="lab-split">
+              <pre class="code" id="code" aria-live="polite"></pre>
+              <div class="issues">
+                <div class="k"><span>Issues by column</span><span id="issue-total"></span></div>
+                <div id="issue-bars"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="caption">Sample rows in the same shape as the course dataset. Values the data can't support are flagged as missing, never guessed.</p>
+      </div>
+    </div>
+
+    <div class="cs-block rv">
+      <h2>Key findings</h2>
+      <div class="findings">
+        <div class="finding"><span class="k">Hidden gaps</span><b>Placeholders hid real gaps</b><span>ERROR and UNKNOWN text sat in real fields, so a plain null count under-reported what was missing.</span></div>
+        <div class="finding"><span class="k">Validity</span><b>Filled isn't the same as valid</b><span>A value can be present and still wrong. Validity needs its own checks on types, categories and IDs.</span></div>
+        <div class="finding"><span class="k">Uniqueness</span><b>Duplicates &amp; IDs need a check</b><span>Checking duplicate records and transaction IDs comes before any sales total can be trusted.</span></div>
+        <div class="finding"><span class="k">Outcome</span><b>A plan, not just a list</b><span>The per-column summary showed what to fix first and what to flag, which turned profiling into a cleaning plan.</span></div>
+      </div>
+    </div>
+
+    <!-- Screenshots: drop images in assets/img/ and uncomment.
+    <div class="cs-block rv">
+      <h2>Visuals</h2>
+      <div class="gallery">
+        <figure><img src="../assets/img/cafe-notebook.png" alt="Jupyter notebook showing missing value counts per column" loading="lazy" width="1600" height="1000"><figcaption>Missing-value profile in Jupyter</figcaption></figure>
+      </div>
+    </div> -->
+
+    <div class="cs-block rv">
+      <h2>Skills shown</h2>
+      <ul class="chips"><li class="chip acc">Python</li><li class="chip acc">Pandas</li><li class="chip acc">Jupyter Notebook</li><li class="chip">Data profiling</li><li class="chip">Data validation</li><li class="chip">Data quality reporting</li></ul>
+    </div>
+
+    <a class="next rv" href="bi-analysis.html">
+      <span class="k">Next case study · 02</span>
+      <b>BI Analysis: Spotify, Airbnb &amp; Climate <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></b>
+    </a>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="wrap"><span>© <span data-year>2026</span> Taha Nankali · Burnaby, BC</span><span>Site by <a href="https://ryanyarali.com" target="_blank" rel="noopener">Ryan Yarali</a></span></div>
+</footer>
+<div class="toast" role="status" aria-live="polite"></div>
+<script src="../assets/js/site.js" defer></script>
+<script src="../assets/js/lab-cafe.js" defer></script>
+</body>
+</html>
