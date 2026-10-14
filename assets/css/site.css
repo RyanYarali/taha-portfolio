@@ -587,3 +587,15 @@ table.raci.focus td.on span { opacity: 1; transform: scale(1.04); }
 .issue-card .impact { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .4s var(--ease); color: var(--ink-2); font-size: 14px; }
 .issue-card .impact > span { overflow: hidden; }
 .issue-card[aria-expanded="true"] .impact { grid-template-rows: 1fr; }
+
+/* Site credit (Ryan Yarali, ryanyarali.com). Quiet by design: small, in the footer's own font and
+   colour; pixel Ping is a silhouette in the text colour and only turns blue and waves on hover or keyboard focus. */
+.ryc-row { margin: 8px 0 0; text-align: inherit; }
+.ryc-link { display: inline-flex !important; align-items: center; gap: 9px; font-size: 12px; line-height: 1.4; letter-spacing: .02em; color: inherit !important; text-decoration: none !important; }
+.ryc-link:hover .ryc-name, .ryc-link:focus-visible .ryc-name { text-decoration: underline; text-underline-offset: 3px; }
+.ryc-px { width: 14px; height: 14px; flex: none; transition: transform .25s ease; }
+.ryc-link:hover .ryc-px, .ryc-link:focus-visible .ryc-px { transform: translateY(-2px); }
+.ryc-px .ryc-hi { display: none; }
+.ryc-link:hover .ryc-px .ryc-rest, .ryc-link:focus-visible .ryc-px .ryc-rest { display: none; }
+.ryc-link:hover .ryc-px .ryc-hi, .ryc-link:focus-visible .ryc-px .ryc-hi { display: inline; }
+@media (prefers-reduced-motion: reduce) { .ryc-px { transition: none; } .ryc-link:hover .ryc-px, .ryc-link:focus-visible .ryc-px { transform: none; } }
